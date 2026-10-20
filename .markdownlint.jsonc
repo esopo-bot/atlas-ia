@@ -1,0 +1,17 @@
+{
+  // Régua de markdown do atlas.
+  "default": true,
+
+  // Tamanho de linha fica de fora: escreva até 120 colunas, sem cobrança. Ela caía em anotação de repositório e
+  // tabela longa, que ninguém requebra. Pasta que quiser a cobrança põe nela um .markdownlint.jsonc próprio.
+  "MD013": false,
+
+  // Título repetido só é erro entre seções irmãs: CHANGELOG repete "Adicionado" em cada versão.
+  "MD024": { "siblings_only": true },
+
+  // Bloco cercado sem linguagem é permitido.
+  "MD040": false,
+
+  // Alinhamento de tabela fica de fora: renderiza igual, e o conserto automático não cobre esta regra.
+  "MD060": false
+}
