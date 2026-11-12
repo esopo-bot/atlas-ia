@@ -1,0 +1,147 @@
+{
+  "env": {
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "0",
+    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "1",
+    "CLAUDE_CODE_GLOB_NO_IGNORE": "false",
+    "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "6",
+    "CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS": "6",
+    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1"
+  },
+  "workflowSizeGuideline": "medium",
+  "includeGitInstructions": false,
+  "attribution": {
+    "pr": "",
+    "sessionUrl": false
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|mcp__github__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/somente-leitura.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/meu.mjs\" indice",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/reply-limit.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(*git*push*origin HEAD:claude/*)",
+      "Bash(*git*push*origin HEAD:homolog)",
+      "Bash(*git*push*origin homolog)"
+    ],
+    "deny": [
+      "Bash(echo atlas-canario)",
+      "Bash(*git push* main*)",
+      "Bash(*git push*:main*)",
+      "Bash(*git push*refs/heads/main*)",
+      "Bash(*git -C * push* main*)",
+      "Bash(*git -C * push*:main*)",
+      "Bash(*git -c * push* main*)",
+      "Bash(*git -c * push*:main*)",
+      "Bash(*git*push*--force*)",
+      "Bash(*git*push* -f*)",
+      "Bash(*git*push* +*)",
+      "Bash(*git*push*--delete*)",
+      "Bash(*git*push* -d *)",
+      "Bash(*git*push*--mirror*)",
+      "Bash(*git*push* :homolog*)",
+      "Bash(*git*push* :develop*)",
+      "Bash(*git*push* :master*)",
+      "Bash(*git*push* :release*)",
+      "Bash(*git*push* :staging*)",
+      "Bash(*git*push* :production*)",
+      "Bash(*git*push* :refs/*)",
+      "Bash(*git*push* main*)",
+      "Bash(*git*push*:main*)",
+      "Bash(*git*push* develop*)",
+      "Bash(*git*push*:develop*)",
+      "Bash(*git*push* master*)",
+      "Bash(*git*push*:master*)",
+      "Bash(*git*push* release*)",
+      "Bash(*git*push*:release*)",
+      "Bash(*git*push* staging*)",
+      "Bash(*git*push*:staging*)",
+      "Bash(*git*push* production*)",
+      "Bash(*git*push*:production*)",
+      "Bash(*git*push*refs/heads/main*)",
+      "Bash(*git*push*refs/heads/*)"
+    ],
+    "ask": [
+      "Bash(echo atlas-canario-pergunta)",
+      "Bash(*gh pr review*--approve*)",
+      "Bash(*gh pr review* -a*)",
+      "Bash(*gh pr merge*--admin*)",
+      "Bash(*gh pr merge*--auto*)",
+      "Bash(*gh pr merge*--delete-branch*)",
+      "Bash(*gh pr merge* -d*)",
+      "Bash(*gh api*/reviews*APPROVE*)",
+      "mcp__github__pull_request_review_write",
+      "mcp__github__enable_pr_auto_merge",
+      "Bash(*gh api*graphql*PullRequestReview*)",
+      "Bash(*gh api*graphql*mergePullRequest*)",
+      "Bash(*gh api*graphql*AutoMerge*)",
+      "Bash(*gh release create*)",
+      "Bash(*gh release edit*)",
+      "Bash(*gh release delete*)",
+      "Bash(*gh api*POST*)",
+      "Bash(*gh api* -f *)",
+      "Bash(*gh api* -F *)",
+      "Bash(*gh api* --raw-field *)",
+      "Bash(*gh api* --field *)",
+      "Bash(*gh api*PATCH*)",
+      "Bash(*gh api*PUT*)",
+      "Bash(*gh api*DELETE*)",
+      "Bash(*gh api*visibility*)",
+      "Bash(*gh api*rulesets*)",
+      "Bash(*gh api*/protection*)",
+      "Bash(*gh api*git/refs*)",
+      "Edit(/**/.github/workflows/**)",
+      "Edit(/**/.github/actions/**)",
+      "Edit(/**/.gitlab-ci.yml)",
+      "Edit(/**/.circleci/**)",
+      "Edit(/**/Jenkinsfile)",
+      "Edit(/**/azure-pipelines.yml)",
+      "Edit(/**/bitbucket-pipelines.yml)",
+      "Edit(/**/.travis.yml)",
+      "Edit(/**/.git/hooks/**)",
+      "Bash(*git*core.hooksPath*)",
+      "Bash(*git*hook.atlas-segredo*)",
+      "Bash(*git*hook.pre-commit.*)",
+      "Bash(*git*hook.commit-msg.*)",
+      "Bash(*git*--no-verify*)",
+      "Bash(*git*commit* -n*)",
+      "Bash(*git*reset*--hard*)",
+      "Bash(*git clean*)",
+      "Bash(*git -C * clean*)",
+      "Bash(*git*branch* -D*)",
+      "Bash(*git*push)",
+      "Bash(*git*push origin)"
+    ]
+  }
+}
